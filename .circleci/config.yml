@@ -18,23 +18,38 @@ jobs:
           go fmt ./...
           go vet ./...
           go test -v ./...
-  publish-github-release:
+  deploy:
     docker:
       - image: circleci/golang:1.9
+    working_directory: /go/src/github.com/eb-rubenespinosa/go-tests
     steps:
-      - attach_workspace:
-          at: ./artifacts
+      - checkout
+      - run: go get -u github.com/mitchellh/gox
+      - run: go get -u github.com/tcnksm/ghr
+      - run: go get -u github.com/stevenmatthewt/semantics
       - run:
-          name: "Publish Release on GitHub"
+          name: cross compile
           command: |
-            go get github.com/tcnksm/ghr
-            VERSION=$(my-binary --version)
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
+            gox -os="linux darwin windows" -arch="amd64" -output="test-darwin-amd64-{{.OS}}-{{.Arch}}"
+            cd / && gzip *
+      - add_ssh_keys
+      - run:
+          name: create release
+          command: |
+            tag=$(semantics --output-tag)
+            if [ "$tag" ]; then
+              ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace $tag dist/
+            else
+              echo "The commit message(s) did not indicate a major/minor/patch version."
+            fi
 workflows:
   version: 2
-  build_test_and_release:
+  build-deploy:
     jobs:
       - build
-      - publish-github-release:
+      - deploy:
           requires:
             - build
+          filters:
+            branches:
+              only: master
