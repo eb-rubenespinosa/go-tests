@@ -35,5 +35,6 @@ workflows:
   build_test_and_release:
     jobs:
       - build
-      - publish-github-release
-  
+      - publish-github-release:
+          requires:
+            - build
