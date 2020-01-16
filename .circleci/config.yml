@@ -30,7 +30,7 @@ jobs:
           command: |
             go get github.com/tcnksm/ghr
             go get -u github.com/stevenmatthewt/semantics
-            VERSION=$(semantics --output-tag)
+            VERSION=0.0.1
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 workflows:
   version: 2
