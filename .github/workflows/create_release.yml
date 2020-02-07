@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - abc
     tags:
       - 'Release v*'
 
