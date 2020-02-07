@@ -3,7 +3,7 @@ on:
     branches:
       - master
     tags:
-      - 'v*'
+      - 'Release v*'
 
 name: create new release
 
