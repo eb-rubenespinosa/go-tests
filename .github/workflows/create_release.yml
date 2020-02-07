@@ -3,7 +3,7 @@ on:
     branches:
       - master
     tags:
-      - 'rv*.*.*'
+      - '*'
 
 name: create new release
 
