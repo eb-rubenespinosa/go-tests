@@ -58,7 +58,7 @@ jobs:
     - name: Modify brew and changelog
       if: matrix.platform == 'macos-latest'
       run: |
-        git clone git@github.com:${{ github.repository }}.git 
+        git clone https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com:${{ github.repository }}.git 
         chmod +x release.sh
         ./release.sh
         git status
