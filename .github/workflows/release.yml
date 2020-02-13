@@ -62,6 +62,12 @@ jobs:
         git pull https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/${{ github.repository }}.git
         chmod +x release.sh
         ./release.sh
+        
+        git add yak.rb CHANGELOG.md README.md
+        git commit -m "Release $VERSION"
+        echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
+        git push
+        
         git status
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
