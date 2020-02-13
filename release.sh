@@ -60,3 +60,5 @@ cat >>CHANGELOG.md <<EOL
 $CHANGELOG
 EOL
 
+sed -i -e 's/download\/[%d.]+\/yak-linux-amd64-.*\.tar\.gz /download\/'"$VERSION"'\/yak-linux-amd64-'"$VERSION"'.tar.gz /g' README.md
+
