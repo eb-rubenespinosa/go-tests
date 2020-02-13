@@ -48,7 +48,7 @@ jobs:
     - name: Upload to release
       uses: JasonEtco/upload-to-release@master
       with:
-        args: yak-${{ matrix.platform }}-${{ github.ref }}.tar.gz
+        args: yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
