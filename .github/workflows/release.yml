@@ -43,7 +43,8 @@ jobs:
         go build
     - name: Make build
       run: |
-        tar czf yak-${{ matrix.platform }}-${{ github.ref }}.tar.gz yak
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        tar czf yak-${{ matrix.platform }}-${{ github.ref }}.tar.gz go-test
     - name: Upload to release
       uses: JasonEtco/upload-to-release@master
       with:
