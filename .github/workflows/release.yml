@@ -48,6 +48,6 @@ jobs:
         curl \
           -X POST \
           --data-binary @tmp.tar.gz \
-          -H 'Content-Type: application/gzip' \
+          -H 'Content-Type: multipart/form-data' \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          "${{ github.event.release.upload_url }}=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz&label=abc"
+          "https://uploads.github.com/repos/eb-rubenespinosa/$GITHUB_REPOSITORY/releases/${{ github.event.release.id }}/assets?name=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz"
