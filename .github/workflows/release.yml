@@ -61,14 +61,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
         CHANGELOG: ${{ github.event.release.body }}
-    - uses: stefanzweifel/git-auto-commit-action@v3.0.0
+    - name: Push changes
+      uses: ad-m/github-push-action@master
       with:
-        commit_message: Release ${{ github.event.release.tag_name }}
-
-        # Optional glob pattern of files which should be added to the commit
-        file_pattern: yak.rb CHANGELOG.md README.md
-
-        # Optional local file path to the repository
-        repository: .
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
  
