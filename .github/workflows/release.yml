@@ -26,6 +26,8 @@ jobs:
       shell: bash
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
     - name: Create go path
       run: |
         mkdir -p $GOPATH/pkg
