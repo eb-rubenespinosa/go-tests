@@ -64,6 +64,3 @@ EOL
 # update README file
 sed -i -e 's/linux-amd64-.*\.tar\.gz /linux-amd64-'"$VERSION"'.tar.gz /g' README.md
 
-git add yak.rb CHANGELOG.md README.md
-
-git commit -m "Release $VERSION"
