@@ -41,7 +41,7 @@ jobs:
             dep ensure  
         fi
         go build
-    - name: Make build
+    - name: Upload Artifacts
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         tar czf tmp.tar.gz go-tests
