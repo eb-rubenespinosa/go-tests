@@ -5,14 +5,39 @@ on:
 
 name: Build and Release
 jobs:
-  release-linux-amd64:
-    name: release linux/amd64
-    runs-on: ubuntu-latest
+  build:
+    name: Build
+    strategy:
+      matrix:
+        go-version: [1.11.x]
+        platform: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
     steps:
-    - uses: actions/checkout@master
-    - name: compile and release
-      uses: ngs/go-release.action@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: linux
+    - name: Install Go
+      if: success()
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Setup env
+      run: |
+        echo "::set-env name=GOPATH::$(go env GOPATH)"
+        echo "::set-env name=GOBIN::$(go env GOPATH)/bin"
+        echo "::add-path::$(go env GOPATH)/bin"
+      shell: bash
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Create go path
+      run: |
+        mkdir -p $GOPATH/pkg
+        mkdir -p $GOBIN
+        mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+    - name: Make build
+      run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure  
+        fi
+        go build
