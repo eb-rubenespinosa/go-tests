@@ -60,7 +60,6 @@ jobs:
       run: |
         git init
         git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        git remote rm origin
         git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         chmod +x release.sh
         ./release.sh
