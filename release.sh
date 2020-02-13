@@ -3,8 +3,6 @@
 set -e
 set -x
 
-RELEASE_BRANCH="master"
-
 if [ -z "${VERSION}" ]; then
     echo "Error: Invalid version: $VERSION"
     exit 1
@@ -69,5 +67,3 @@ sed -i -e 's/linux-amd64-.*\.tar\.gz /linux-amd64-'"$VERSION"'.tar.gz /g' README
 git add yak.rb CHANGELOG.md README.md
 
 git commit -m "Release $VERSION"
-echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
-git push origin $RELEASE_BRANCH -f
