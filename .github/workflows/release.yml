@@ -33,8 +33,8 @@ jobs:
         mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
         mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
     - name: Make build
-      working-directory: $GOPATH/src/github.com/$GITHUB_REPOSITORY
       run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -42,8 +42,8 @@ jobs:
         fi
         go build
     - name: Make build
-      working-directory: $GOPATH/src/github.com/$GITHUB_REPOSITORY
       run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         tar czf tmp.tar.gz go-tests
 
     - name: Upload Release Asset
