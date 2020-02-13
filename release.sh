@@ -21,6 +21,9 @@ fi
 # get the release asset URL
 release_url=$ASSET_URL
 
+RELEASE_BRANCH="master"
+
+git checkout -b $RELEASE_BRANCH
 
 # Generate brew config file
 cat <<EOF >yak.rb
@@ -67,3 +70,6 @@ sed -i -e 's/linux-amd64-.*\.tar\.gz /linux-amd64-'"$VERSION"'.tar.gz /g' README
 git add yak.rb CHANGELOG.md README.md
 
 git commit -m "Release $VERSION"
+
+echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
+git push origin $RELEASE_BRANCH -f
