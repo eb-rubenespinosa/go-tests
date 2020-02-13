@@ -59,6 +59,7 @@ jobs:
       if: matrix.platform == 'macos-latest'
       run: |
         git clone https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/${{ github.repository }}.git 
+        cd $GITHUB_REPOSITORY
         chmod +x release.sh
         ./release.sh
         git status
