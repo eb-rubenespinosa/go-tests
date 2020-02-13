@@ -70,4 +70,4 @@ git add yak.rb CHANGELOG.md README.md
 
 git commit -m "Release $VERSION"
 echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
-git push
+git push origin $RELEASE_BRANCH -f
