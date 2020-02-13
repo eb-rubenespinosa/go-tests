@@ -23,7 +23,7 @@ release_url=$ASSET_URL
 
 RELEASE_BRANCH="master"
 
-git checkout origin/$RELEASE_BRANCH
+git checkout $RELEASE_BRANCH
 
 # Generate brew config file
 cat <<EOF >yak.rb
