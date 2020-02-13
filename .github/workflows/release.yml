@@ -31,10 +31,7 @@ jobs:
         mkdir -p $GOPATH/pkg
         mkdir -p $GOBIN
         mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
-        mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
-        pwd
-        ls
-        ln -s $GOPATH/src/github.com/$GITHUB_REPOSITORY $GITHUB_WORKSPACE/
+        ln -s $GITHUB_WORKSPACE $GOPATH/src/github.com/$GITHUB_REPOSITORY
         pwd
         ls
     - name: Make build
@@ -48,16 +45,14 @@ jobs:
         go build
     - name: Make build
       run: |
-        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         tar czf tmp.tar.gz go-tests
 
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        work-dir: $GOPATH/src/github.com/$GITHUB_REPOSITORY
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ${{ env.work-dir }}/tmp.tar.gz
+        asset_path: ./tmp.tar.gz
         asset_name: yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz
         asset_content_type: application/gzip
