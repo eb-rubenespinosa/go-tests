@@ -8,3 +8,6 @@ This are the files changed:
 * yak.rb
 * CHANGELOG.md
 * README.md
+
+## 1.1.20 (2020-02-13)
+asdf
