@@ -70,6 +70,8 @@ jobs:
         chmod +x release.sh
         ./release.sh
         
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add yak.rb CHANGELOG.md
         git commit -m "Release $VERSION for MacOS"
       env:
@@ -83,6 +85,8 @@ jobs:
         # update README file
         sed -i -e 's/download\/[%d.]+\/yak-linux-amd64-.*\.tar\.gz /download\/'"$VERSION"'\/yak-linux-amd64-'"$VERSION"'.tar.gz /g' README.md
         
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add README.md
         git commit -m "Release $VERSION Linux"
     - name: Push master changes
