@@ -23,7 +23,6 @@ fi
 # get the release asset URL
 release_url=$(curl -sL https://api.github.com/repos/eventbrite/yak/releases/latest?access_token=$GITHUB_TOKEN | jq -r '.assets[].url')
 
-git checkout -b $RELEASE_BRANCH
 
 # Generate brew config file
 cat <<EOF >yak.rb
@@ -71,4 +70,4 @@ git add yak.rb CHANGELOG.md README.md
 
 git commit -m "Release $VERSION"
 echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
-git push origin $RELEASE_BRANCH -f
+git push
