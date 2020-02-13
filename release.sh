@@ -21,7 +21,7 @@ fi
 
 # download the MacOS release from Github
 # get the release asset URL
-release_url=$(curl -sL https://api.github.com/repos/eventbrite/yak/releases/latest?access_token=$GITHUB_TOKEN | jq -r '.assets[].url')
+release_url=$ASSET_URL
 
 
 # Generate brew config file
