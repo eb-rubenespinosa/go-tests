@@ -52,6 +52,7 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz"
     - name: Modify brew and changelog
+      if: contains( ${{ matrix.platform }}, "macos" )
       run: |
         ./release.sh
       env:
