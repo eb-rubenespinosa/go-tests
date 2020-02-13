@@ -53,6 +53,6 @@ jobs:
         work-dir: $GOPATH/src/github.com/$GITHUB_REPOSITORY
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ${{ work-dir }}/tmp.tar.gz
+        asset_path: ${{ env.work-dir }}/tmp.tar.gz
         asset_name: yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz
         asset_content_type: application/gzip
