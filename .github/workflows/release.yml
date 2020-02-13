@@ -63,8 +63,10 @@ jobs:
     - name: Modify brew and changelog
       if: matrix.platform == 'macos-latest'
       run: |
+        git status
         chmod +x release.sh
         ./release.sh
+        git status
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
