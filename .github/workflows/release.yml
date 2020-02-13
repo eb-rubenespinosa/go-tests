@@ -59,8 +59,9 @@ jobs:
       if: matrix.platform == 'macos-latest'
       run: |
         git init
-        git pull https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/${{ github.repository }}.git
-        git remote add origin https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/${{ github.repository }}.git
+        git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        git remote rm origin
+        git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         chmod +x release.sh
         ./release.sh
         
