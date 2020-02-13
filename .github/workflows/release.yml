@@ -58,38 +58,21 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-$PLATFORM-${{ github.event.release.tag_name }}.tar.gz" | jq -r '.url')
           echo "::set-env name=ASSET_URL::$asset_url"
-    - name: Checkout master code
-      uses: actions/checkout@v2
-      with:
-        branch: 'master'
-        fetch-depth: '0'
-        tags: false
     - name: Modify brew and changelog
       if: matrix.platform == 'macos-latest'
       run: |
+        git init
+        git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         chmod +x release.sh
         ./release.sh
         
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add yak.rb CHANGELOG.md
-        git commit -m "Release $VERSION for MacOS"
+        git add yak.rb CHANGELOG.md README.md
+        git commit -m "Release $VERSION"
+        git status
+        echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
+        git push --set-upstream origin master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
         CHANGELOG: ${{ github.event.release.body }}
-    - name: Modify linux 
-      if: matrix.platform == 'ubuntu-latest'
-      run: |
-
-        # update README file
-        sed -i -e 's/download\/[%d.]+\/yak-linux-amd64-.*\.tar\.gz /download\/'"$VERSION"'\/yak-linux-amd64-'"$VERSION"'.tar.gz /g' README.md
-        
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add README.md
-        git commit -m "Release $VERSION Linux"
-    - name: Push master changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
