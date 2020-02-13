@@ -31,7 +31,7 @@ jobs:
         mkdir -p $GOPATH/pkg
         mkdir -p $GOBIN
         mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
-        cp ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
     - name: Make build
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
@@ -52,6 +52,10 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz" | jq -r '.url')
           echo "::set-env name=ASSET_URL::$asset_url"
+    - name: Checkout master code
+      uses: actions/checkout@v2
+      with:
+        ref: 'master'
     - name: Modify brew and changelog
       if: matrix.platform == 'macos-latest'
       run: |
