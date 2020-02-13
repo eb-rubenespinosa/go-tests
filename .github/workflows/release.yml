@@ -41,3 +41,13 @@ jobs:
             dep ensure  
         fi
         go build
+    - name: Make build
+      run: |
+        tar czf yak-${{ matrix.platform }}-${{ github.ref }}.tar.gz yak
+    - name: Upload to release
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: yak-${{ matrix.platform }}-${{ github.ref }}.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
