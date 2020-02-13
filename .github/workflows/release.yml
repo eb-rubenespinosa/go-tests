@@ -34,7 +34,7 @@ jobs:
         mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
         pwd
         ls
-        ln -s $GOPATH/src/github.com/$GITHUB_REPOSITORY $GITHUB_WORKSPACE
+        ln -s $GOPATH/src/github.com/$GITHUB_REPOSITORY $GITHUB_WORKSPACE/
         pwd
         ls
     - name: Make build
