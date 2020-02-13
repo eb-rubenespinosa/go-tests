@@ -50,4 +50,4 @@ jobs:
           --data-binary @tmp.tar.gz \
           -H 'Content-Type: multipart/form-data' \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          "https://uploads.github.com/repos/eb-rubenespinosa/$GITHUB_REPOSITORY/releases/${{ github.event.release.id }}/assets?name=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz"
+          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz"
