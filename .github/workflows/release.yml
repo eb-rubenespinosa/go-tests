@@ -50,4 +50,4 @@ jobs:
           --data-binary @tmp.tar.gz \
           -H 'Content-Type: application/gzip' \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          "${{ github.event.release.upload_url }}=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz"
+          "${{ github.event.release.upload_url }}=yak-${{ matrix.platform }}-${{ github.event.release.tag_name }}.tar.gz&label=abc"
