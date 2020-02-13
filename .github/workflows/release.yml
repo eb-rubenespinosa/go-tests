@@ -33,7 +33,8 @@ jobs:
         mkdir -p $GOPATH/pkg
         mkdir -p $GOBIN
         mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
-        cp ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        rm -rf .git*
     - name: Make build
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
@@ -57,7 +58,6 @@ jobs:
     - name: Modify brew and changelog
       if: matrix.platform == 'macos-latest'
       run: |
-        git status
         chmod +x release.sh
         ./release.sh
         git status
