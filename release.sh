@@ -27,7 +27,7 @@ cat <<EOF >yak.rb
 class Yak < Formula
   desc "A command line tool to manage dev environments on Kubernetes"
   homepage "https://github.com/eventbrite/yak"
-  url "$release_url"
+  url "https://api.github.com/repos/eb-rubenespinosa/go-tests/releases/assets/$mac_asset_id"
   sha256 "$SHA_256"
   version "$VERSION"
   bottle :unneeded
@@ -60,5 +60,5 @@ cat >>CHANGELOG.md <<EOL
 $CHANGELOG
 EOL
 
-sed -i -e 's/download\/[%d.]+\/yak-linux-amd64-.*\.tar\.gz /download\/'"$VERSION"'\/yak-linux-amd64-'"$VERSION"'.tar.gz /g' README.md
+sed -i -e 's/assets\/[0-9]\+ /assets\/'"$linux_asset_id"' /g' README.md
 
