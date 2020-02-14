@@ -57,8 +57,8 @@ jobs:
           -H 'Content-Type: multipart/form-data' \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-$PLATFORM-${{ github.event.release.tag_name }}.tar.gz" | jq -r '.url')
-          echo $asset_url > ${{ matrix.platform }}.txt
-          ls
+          echo $asset_url > ${{github.workspace}}/${{ matrix.platform }}.txt
+          ls ${{github.workspace}}
     - name: Upload math result for job 2
       uses: actions/upload-artifact@v1
       with:
