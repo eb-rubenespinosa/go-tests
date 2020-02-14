@@ -74,10 +74,12 @@ jobs:
       with:
         name: homework
     - name: Modify brew and changelog
-      run: 
+      run: |
         ls
-        value=`cat homework/math-homework.txt`
-        echo $value
+        linux=`cat ubuntu-latest.txt`
+        mac=`cat macos-latest.txt`
+        echo $linux
+        echo $mac
         git init
         git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
