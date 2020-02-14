@@ -76,8 +76,8 @@ jobs:
     - name: Modify brew and changelog
       run: |
         ls assets
-        linux_asset_id=`cat assets/ubuntu-latest.txt`
-        mac_asset_id=`cat assets/macos-latest.txt`
+        export LINUX_ASSET_ID=`cat assets/ubuntu-latest.txt`
+        export MAC_ASSET_ID=`cat assets/macos-latest.txt`
         git init
         git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
