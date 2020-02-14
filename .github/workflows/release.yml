@@ -57,15 +57,27 @@ jobs:
           -H 'Content-Type: multipart/form-data' \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-$PLATFORM-${{ github.event.release.tag_name }}.tar.gz" | jq -r '.url')
-          echo "::set-env name=ASSET_URL::$asset_url"
+          echo $asset_url > ${{ matrix.platform }}.txt
+          ls
+    - name: Upload math result for job 2
+      uses: actions/upload-artifact@v1
+      with:
+        name: homework
+        path: ${{ matrix.platform }}.txt
   publish:
     name: Publish files in master
     needs: [build]
     runs-on: [macos-latest]
     steps:
+    - name: Download math result for job 2
+      uses: actions/download-artifact@v1
+      with:
+        name: homework
     - name: Modify brew and changelog
       run: 
-        echo $ASSET_URL
+        ls
+        value=`cat homework/math-homework.txt`
+        echo $value
         git init
         git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
