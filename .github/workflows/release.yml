@@ -62,7 +62,7 @@ jobs:
     - name: Upload math result for job 2
       uses: actions/upload-artifact@v1
       with:
-        name: homework
+        name: assets
         path: ${{ matrix.platform }}.txt
   publish:
     name: Publish files in master
@@ -72,12 +72,12 @@ jobs:
     - name: Download math result for job 2
       uses: actions/download-artifact@v1
       with:
-        name: homework
+        name: assets
     - name: Modify brew and changelog
       run: |
-        ls
-        linux=`cat ubuntu-latest.txt`
-        mac=`cat macos-latest.txt`
+        ls assets
+        linux=`cat assets/ubuntu-latest.txt`
+        mac=`cat assets/macos-latest.txt`
         echo $linux
         echo $mac
         git init
