@@ -11,3 +11,6 @@ This are the files changed:
 
 ## 1.1.20 (2020-02-13)
 asdf
+
+## 1.1.27 (2020-02-14)
+This should be filled
