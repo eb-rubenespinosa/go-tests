@@ -64,7 +64,6 @@ jobs:
     runs-on: [macos-latest]
     steps:
     - name: Modify brew and changelog
-      if: matrix.platform == 'macos-latest'
       run: 
         echo $ASSET_URL
         git init
