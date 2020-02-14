@@ -60,5 +60,5 @@ cat >>CHANGELOG.md <<EOL
 $CHANGELOG
 EOL
 
-sed -i -e 's/assets\/[0-9]\+ /assets\/'"$LINUX_ASSET_ID"' /g' README.md
+sed -i -e 's/assets\/[0-9][0-9]* /assets\/'"$LINUX_ASSET_ID"' /g' README.md
 
