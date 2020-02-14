@@ -58,9 +58,15 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-$PLATFORM-${{ github.event.release.tag_name }}.tar.gz" | jq -r '.url')
           echo "::set-env name=ASSET_URL::$asset_url"
+  publish:
+    name: Publish files in master
+    needs: [build]
+    runs-on: [macos-latest]
+    steps:
     - name: Modify brew and changelog
       if: matrix.platform == 'macos-latest'
-      run: |
+      run: 
+        echo $ASSET_URL
         git init
         git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
