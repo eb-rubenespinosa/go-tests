@@ -68,15 +68,15 @@ jobs:
     needs: [build]
     runs-on: [macos-latest]
     steps:
-    - name: Download math result for job 2
-      uses: actions/download-artifact@v1
-      with:
-        name: assets
     - name: Checkout master code
       uses: actions/checkout@v2
       with:
         ref: master
         fetch-depth: 0
+    - name: Download math result for job 2
+      uses: actions/download-artifact@v1
+      with:
+        name: assets
     - name: Modify brew and changelog
       run: |
         export LINUX_ASSET_ID=`cat assets/ubuntu-latest.txt`
