@@ -72,23 +72,25 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: assets
+    - name: Checkout master code
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 0
     - name: Modify brew and changelog
       run: |
-        ls assets
         export LINUX_ASSET_ID=`cat assets/ubuntu-latest.txt`
         export MAC_ASSET_ID=`cat assets/macos-latest.txt`
-        git init
-        git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         chmod +x release.sh
         ./release.sh
         
         git add yak.rb CHANGELOG.md README.md
         git commit -m "Release $VERSION"
-        git status
-        echo "Pushing version $VERSION to $RELEASE_BRANCH branch"
-        git push --set-upstream origin master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
         CHANGELOG: ${{ github.event.release.body }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
