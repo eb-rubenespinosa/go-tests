@@ -34,8 +34,8 @@ jobs:
         mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
         rm -rf .git*
     - name: Make build
-      working-directory: ${{env.GOPATH}}/src/github.com/${{env.GITHUB_REPOSITORY}}
       run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -43,8 +43,8 @@ jobs:
         fi
         go build
     - name: Upload Artifacts
-      working-directory: ${{env.GOPATH}}/src/github.com/${{env.GITHUB_REPOSITORY}}
       run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         tar czf tmp.tar.gz go-tests
         if [ "${{ matrix.platform }}" == "macos-latest" ]; then
           export PLATFORM="darwin-amd64"  
