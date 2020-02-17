@@ -2,9 +2,9 @@
 class Yak < Formula
   desc "A command line tool to manage dev environments on Kubernetes"
   homepage "https://github.com/eventbrite/yak"
-  url "https://api.github.com/repos/eb-rubenespinosa/go-tests/releases/assets/18096189"
+  url "https://api.github.com/repos/eb-rubenespinosa/go-tests/releases/assets/18096274"
   sha256 ""
-  version "1.1.39"
+  version "1.1.40"
   bottle :unneeded
   depends_on "kubernetes-cli"
   depends_on "watch"
