@@ -56,7 +56,7 @@ jobs:
           --data-binary @tmp.tar.gz \
           -H 'Content-Type: multipart/form-data' \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-$PLATFORM-${{ github.event.release.tag_name }}.tar.gz&label=${{ matrix.platform }}" | jq -r '.id')
+          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=yak-$PLATFORM-${{ github.event.release.tag_name }}.tar.gz&label=$PLATFORM" | jq -r '.id')
           echo $asset_url > ${{github.workspace}}/${{ matrix.platform }}.txt
           ls ${{github.workspace}}
     - name: Upload math result for job 2
