@@ -11,6 +11,10 @@ if [ -z "${CHANGELOG}" ]; then
     echo "Error: Invalid changelog: $CHANGELOG"
     exit 1
 fi
+if [ -z "${MAC_ASSET_SHA_256}" ]; then
+    echo "Error: Invalid mac asset sha256: $MAC_ASSET_SHA_256"
+    exit 1
+fi
 
 if grep -w "$VERSION" CHANGELOG.md; then
     echo "Error: $VERSION already released, found a changelog entry for it."
@@ -28,7 +32,7 @@ class Yak < Formula
   desc "A command line tool to manage dev environments on Kubernetes"
   homepage "https://github.com/eventbrite/yak"
   url "https://api.github.com/repos/eb-rubenespinosa/go-tests/releases/assets/$MAC_ASSET_ID"
-  sha256 "$SHA_256"
+  sha256 "$MAC_ASSET_SHA_256"
   version "$VERSION"
   bottle :unneeded
   depends_on "kubernetes-cli"
