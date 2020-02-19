@@ -120,7 +120,7 @@ jobs:
       run: |
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
-        chmod +x release.sh
+        chmod +x release_beta.sh
         ./release_beta.sh
         
         git add yak@0-beta.rb
