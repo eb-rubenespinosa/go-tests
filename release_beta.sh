@@ -33,7 +33,7 @@ require_relative "github_download_strategy.rb"
 class YakAT0Beta < Formula
   desc "A command line tool to manage dev environments on Kubernetes"
   homepage "https://github.com/eventbrite/yak"
-  url "https://api.github.com/repos/eb-rubenespinosa/go-tests/releases/assets/$MAC_ASSET_ID"
+  url "https://api.github.com/repos/eb-rubenespinosa/go-tests/releases/assets/$MAC_ASSET_ID", :using => CustomGitHubPrivateRepositoryReleaseDownloadStrategy
   sha256 "$MAC_ASSET_SHA_256"
   version "$VERSION"
   bottle :unneeded
