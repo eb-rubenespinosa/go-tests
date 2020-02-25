@@ -77,8 +77,9 @@ jobs:
         name: assets
     - name: Modify brew and changelog
       run: |
-        git clone https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        cd $(ls -d */|head -n 1)
+        git init
+        git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         export LINUX_ASSET_ID=`sed -n 1p ../assets/ubuntu-latest.txt`
         export MAC_ASSET_ID=`sed -n 1p ../assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p ../assets/macos-latest.txt`
@@ -87,7 +88,7 @@ jobs:
         
         git add yak.rb CHANGELOG.md README.md
         git commit -m "Release $VERSION"
-        git push
+        git push --set-upstream origin master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
@@ -104,18 +105,17 @@ jobs:
         name: assets
     - name: Modify brew and changelog
       run: |
-        git clone https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        echo "test"
-        echo $(ls -d */|head -n 1)
-        cd $(ls -d */|head -n 1)
-        export MAC_ASSET_ID=`sed -n 1p ../assets/macos-latest.txt`
-        export MAC_ASSET_SHA_256=`sed -n 2p ../assets/macos-latest.txt`
+        git init
+        git remote add origin https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        git pull https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
+        export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
         chmod +x release_beta.sh
         ./release_beta.sh
         
         git add yak@0-beta.rb
         git commit -m "Pre-release $VERSION"
-        git push
+        git push --set-upstream origin master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
