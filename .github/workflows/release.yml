@@ -78,7 +78,7 @@ jobs:
     - name: Modify brew and changelog
       run: |
         git clone https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        cd git-clone
+        cd go-tests
         export LINUX_ASSET_ID=`sed -n 1p assets/ubuntu-latest.txt`
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
@@ -105,7 +105,7 @@ jobs:
     - name: Modify brew and changelog
       run: |
         git clone https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        cd git-clone
+        cd go-tests
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
         chmod +x release_beta.sh
