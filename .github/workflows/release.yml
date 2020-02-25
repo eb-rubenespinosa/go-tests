@@ -105,6 +105,8 @@ jobs:
     - name: Modify brew and changelog
       run: |
         git clone https://${{github.actor}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        echo "test"
+        echo $(ls -d */|head -n 1)
         cd $(ls -d */|head -n 1)
         export MAC_ASSET_ID=`sed -n 1p ../assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p ../assets/macos-latest.txt`
