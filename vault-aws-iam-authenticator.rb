@@ -3,9 +3,9 @@ require_relative "./homebrew-utils/github_download_strategy.rb"
 class VaultAwsIamAuthenticator < Formula
   desc "Get aws credentials from vault"
   homepage "https://github.com/eventbrite/vault-aws-iam-authenticator"
-  url "https://api.github.com/repos/eventbrite/vault-aws-iam-authenticator/releases/assets/18403098", :using => CustomGitHubPrivateRepositoryReleaseDownloadStrategy
-  sha256 "ffc4ced31a192363b04a13efd27b42f85c8bd7d541c69cbc85a81e77ff079cab"
-  version "0.0.7"
+  url "https://jenkins.evbhome.com/job/vault-aws-iam-authenticator-release/lastSuccessfulBuild/artifact/src/github.com/eventbrite/vault-aws-iam-authenticator/vault-aws-iam-authenticator-darwin-amd64-0.0.6.tar.gz"
+  sha256 "1ed235cbab1fea887dba7ad9383005030d8a6250b61072cb1c343a147715f33f"
+  version "0.0.6"
 
   def install
     bin.install "vault-aws-iam-authenticator"
