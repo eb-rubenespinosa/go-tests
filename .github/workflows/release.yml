@@ -83,12 +83,15 @@ jobs:
         export LINUX_ASSET_ID=`sed -n 1p assets/ubuntu-latest.txt`
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
-        chmod +x release.sh
-        ./release.sh
         
         git add yak.rb CHANGELOG.md README.md
         git commit -m "Release $VERSION"
         git push --set-upstream origin master
+
+        curl -X POST https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.GITHUB_TOKEN }} \
+          --data '{"event_type": "yak_release", "client_payload": { "version": "'"$VERSION"'", "mac_sha": "'"$MAC_ASSET_SHA_256"'", "asset_id": "'"$MAC_ASSET_ID"'" }}'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
