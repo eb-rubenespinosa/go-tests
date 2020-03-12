@@ -83,12 +83,6 @@ jobs:
         export LINUX_ASSET_ID=`sed -n 1p assets/ubuntu-latest.txt`
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
-        chmod +x release.sh
-        ./release.sh
-        
-        git add CHANGELOG.md README.md
-        git commit -m "Release $VERSION"
-        git push --set-upstream origin master
 
         curl -X POST https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
