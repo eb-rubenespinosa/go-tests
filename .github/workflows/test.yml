@@ -11,7 +11,7 @@ jobs:
       - name: PING - Dispatch initiating repository event
         run: |
           curl -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
             --request POST \
             --data '{"event_type": "yak_release", "client_payload": { "text": "a title"}}' \
             https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches
