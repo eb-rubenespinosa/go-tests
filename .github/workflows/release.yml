@@ -84,7 +84,7 @@ jobs:
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
         
-        git CHANGELOG.md README.md
+        git add CHANGELOG.md README.md
         git commit -m "Release $VERSION"
         git push --set-upstream origin master
 
