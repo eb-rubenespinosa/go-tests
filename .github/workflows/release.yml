@@ -86,7 +86,7 @@ jobs:
 
         curl -X POST https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.GITHUB_TOKEN }} \
+          -H "Authorization: token $GITHUB_TOKEN"
           --data '{"event_type": "yak_release", "client_payload": { "version": "'"$VERSION"'", "mac_sha": "'"$MAC_ASSET_SHA_256"'", "asset_id": "'"$MAC_ASSET_ID"'" }}'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
