@@ -8,7 +8,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: PING - Dispatch initiating repository event
+      - name: Dispatch initiating repository event
         run: |
           curl -H "Accept: application/vnd.github.everest-preview+json" \
             -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
