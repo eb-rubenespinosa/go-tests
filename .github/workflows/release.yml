@@ -83,11 +83,6 @@ jobs:
         export LINUX_ASSET_ID=`sed -n 1p assets/ubuntu-latest.txt`
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
-
-        curl -X POST https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
-          --data '{"event_type": "vault_aws_iam_auth_release", "client_payload": { "version": "'"$VERSION"'", "mac_sha": "'"$MAC_ASSET_SHA_256"'", "asset_id": "'"$MAC_ASSET_ID"'" }}'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
@@ -119,3 +114,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
         CHANGELOG: ${{ github.event.release.body }}
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: eb-rubenespinosa/brew_test
+        event-type: vault_aws_iam_auth_release
+        client-payload: '{ "version": "1.1.1", "mac_sha": "lksadf8a7sd8fdsa", "asset_id": "42134214" }'
