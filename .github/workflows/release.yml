@@ -1,7 +1,7 @@
 on: 
   release:
     tags:
-      - "v"
+      - '[0-9]+.[0-9]+.[0-9]'
 
 name: Build and Release
 jobs:
