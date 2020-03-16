@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Semver Tag
       run: |
-        if [[ ${{ github.event.release.tag_name }} =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$ ]]; then
+        if [[ ${{ github.event.release.tag_name }} =~ ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-([a-z-][\da-z-]+|[\da-z-]+[a-z-][\da-z-]*|0|[1-9]\d*)(\.([a-z-][\da-z-]+|[\da-z-]+[a-z-][\da-z-]*|0|[1-9]\d*))*)?(\+[\da-z-]+(\.[\da-z-]+)*)?$ ]]; then
             echo "Semver correct"
         else
             echo "Semver incorrect"
