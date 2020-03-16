@@ -3,7 +3,7 @@ on:
     types:
       - published
     tags:
-      - "[0-9]+.[0-9]+.[0-9]"
+      - "v"
 
 name: Build and Release
 jobs:
