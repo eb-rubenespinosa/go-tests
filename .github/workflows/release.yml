@@ -2,8 +2,6 @@ on:
   release:
     types:
       - published
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]'
 
 name: Build and Release
 jobs:
@@ -15,6 +13,11 @@ jobs:
         platform: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+    - name: Check Semver Tag
+      run: |
+        if [[ ${{ github.event.release.tag_name }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            exit 1
+        fi
     - name: Install Go
       if: success()
       uses: actions/setup-go@v1
