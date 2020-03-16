@@ -13,12 +13,15 @@ jobs:
         platform: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
-    - name: Check Semver Tag
+    - name: Semver Tag
       run: |
         if [[ ${{ github.event.release.tag_name }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "diff"
+            echo ::set-output name=semver::true
         fi
-        echo "iggg"
+    - name: Check Semver
+      if: steps.check-tag.outputs.semver != 'true'
+      run: |
+        exit 1
     - name: Install Go
       if: success()
       uses: actions/setup-go@v1
