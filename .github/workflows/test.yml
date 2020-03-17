@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     steps:
-    - name: Validator
+    - name: Validator test
       uses: eb-rubenespinosa/semver-validation-action@0.0.1
       with:
         version: '1.1.1'
