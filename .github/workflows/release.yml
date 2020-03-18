@@ -95,11 +95,7 @@ jobs:
         curl -X POST https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -H "Authorization: token ${{secrets.PAT_TOKEN}}" \
-          --data '{"event_type": "vault_aws_iam_auth_release", "client_payload": { "version": "'"$VERSION"'", "mac_sha": "'"$MAC_ASSET_SHA_256"'", "asset_id": "'"$MAC_ASSET_ID"'" }}'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        VERSION: ${{ github.event.release.tag_name }}
-        CHANGELOG: ${{ github.event.release.body }}
+          --data '{"event_type": "vault_aws_iam_auth_release", "client_payload": { "version": "'"${{ github.event.release.tag_name }}"'", "mac_sha": "$MAC_ASSET_SHA_256", "asset_id": "'"$MAC_ASSET_ID"'" }}'
   publish_beta:
     name: Publish beta files in master
     needs: [build]
