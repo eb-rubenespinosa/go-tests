@@ -9,7 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     steps:
-    - name: Validator
+    - name: Validator1
       uses: eb-rubenespinosa/semver-validation-action@0.0.4
       with:
-        version: "1.1.1"
+        version: "11.1.21"
+    - name: Validator2
+      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      with:
+        version: "0.1.5"
+    - name: Validator3
+      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      with:
+        version: "0.21.31-beta"
+    - name: Validator4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      with:
+        version: "0.21.31-beta.1"
+    - name: Validator5
+      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      with:
+        version: "0.21.31beta"
