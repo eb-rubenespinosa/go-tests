@@ -10,30 +10,30 @@ jobs:
     name: Test
     steps:
     - name: Validator1
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "11.1.21"
     - name: Validator2
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "0.1.5"
     - name: Validator3
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "0.21.31-beta"
     - name: Validator4
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "0.21.31-beta.1"
     - name: Validator5
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "v0.1.5"
     - name: Validator6
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "10.1.5-alpha+beta"
     - name: Validator7
-      uses: eb-rubenespinosa/semver-validation-action@0.0.4
+      uses: eb-rubenespinosa/semver-validation-action@0.0.5
       with:
         version: "0.21.31beta"
