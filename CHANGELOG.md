@@ -50,3 +50,8 @@ RE
 
 ## 1.1.45 (2020-02-25)
 1.1.45
+
+## 1.0.42 (2020-03-23)
+ljasdfljkdafs
+dafskljadsfljads
+adfsadfs
