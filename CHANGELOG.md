@@ -55,3 +55,9 @@ RE
 ljasdfljkdafs
 dafskljadsfljads
 adfsadfs
+
+## 1.0.43 (2020-03-23)
+Task1
+Task2
+Bug1
+EB-0'23495 adafdjkljafdkljñafsd
