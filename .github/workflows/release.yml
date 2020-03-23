@@ -92,7 +92,7 @@ jobs:
         export MAC_ASSET_ID=`sed -n 1p assets/macos-latest.txt`
         export MAC_ASSET_SHA_256=`sed -n 2p assets/macos-latest.txt`
 
-        if [ -z "${LINUX_ASSET_ID}" ]; then
+        if [ -z $LINUX_ASSET_ID ]; then
             echo "Error: Invalid linux asset id: $LINUX_ASSET_ID"
             exit 1
         fi
