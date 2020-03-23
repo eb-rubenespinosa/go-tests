@@ -96,28 +96,28 @@ jobs:
             echo "Error: Invalid linux asset id: $LINUX_ASSET_ID"
             exit 1
         fi
-        if grep -w "$VERSION" CHANGELOG.md; then
-            echo "Error: $VERSION already released, found a changelog entry for it."
+        if grep -w ${{ github.event.release.tag_name }} CHANGELOG.md; then
+            echo "Error: ${{ github.event.release.tag_name }} already released, found a changelog entry for it."
             exit 1
         fi
 
         DATE=`date +%Y-%m-%d`
         cat >>CHANGELOG.md <<EOL
 
-        ## $VERSION ($DATE)
+        ## ${{ github.event.release.tag_name }} ($DATE)
         ${{ github.event.release.body }}
         EOL
 
         sed -i -e 's/assets\/[0-9][0-9]* /assets\/'"$LINUX_ASSET_ID"' /g' README.md
 
         git add CHANGELOG.md README.md
-        git commit -m "Release $VERSION"
+        git commit -m "Release ${{ github.event.release.tag_name }}"
         git push --set-upstream origin master
 
         curl -X POST https://api.github.com/repos/eb-rubenespinosa/brew_test/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -H "Authorization: token ${{secrets.PAT_TOKEN}}" \
-          --data '{"event_type": "vault_aws_iam_auth_release", "client_payload": { "version": "'"$VERSION"'", "mac_sha": "'"$MAC_ASSET_SHA_256"'", "asset_id": "'"$MAC_ASSET_ID"'" }}'
+          --data '{"event_type": "vault_aws_iam_auth_release", "client_payload": { "version": "'${{ github.event.release.tag_name }}'", "mac_sha": "'$MAC_ASSET_SHA_256'", "asset_id": "'$MAC_ASSET_ID'" }}'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ github.event.release.tag_name }}
