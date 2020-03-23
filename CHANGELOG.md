@@ -61,3 +61,9 @@ Task1
 Task2
 Bug1
 EB-0'23495 adafdjkljafdkljñafsd
+
+## 1.0.44 (2020-03-23)
+asdf
+dasf lkfas 
+asjk asdl a a
+asdf asdoi uas 
